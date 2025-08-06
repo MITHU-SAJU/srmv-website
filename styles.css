@@ -28,20 +28,6 @@ section {
   padding: 100px 20px;
 }
 
-  .animate-text span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s forwards;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
 /* Navbar */
 nav {
   background: linear-gradient(to left, #EEAECA, #94BBE9);
@@ -62,23 +48,39 @@ nav {
   font-size: 1.2rem;
 }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  font-size: larger;
-  color: #131a2a;
+.navbar-nav{
+  gap:1rem;
+}
+/* Remove the space before :hover — it should target .nav-link directly */
+.navbar-nav .nav-link {
+  position: relative;
+  color: white;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
 }
 
-.nav-links a {
-  color: black !important;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 25px;
+/* Underline animation */
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 50%;
+  bottom: 0;
+  background-color: white; /* Bootstrap primary blue */
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-.nav-links a:hover {
-  color: #f8d90f;
+/* On hover — text color change + underline grow from center */
+.navbar-nav .nav-link:hover {
+  color: white;
 }
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
 
 /* Hamburger menu */
 .hamburger {
@@ -133,72 +135,46 @@ nav {
 }
 
 /* Banner */
-#banner {
-  position: relative;
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('./assets/bg-image.jpg') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10%;
-  overflow: hidden;
-  text-align: center;
+/* Default sizes for desktop/tablet */
+/* Desktop font sizes */
+h1.display-4 {
+  font-size: 10.5rem;
+  opacity: 0; /* start hidden for animation */
+  transform: translateY(30px); /* start slightly down */
+  animation: fadeSlideUp 1s ease-out forwards; /* animate on load */
 }
 
-#banner .content {
-  color: #fff;
-  max-width: 700px;
-  z-index: 2;
-}
-
-#banner h1 {
-  font-size: 7rem;
-  font-family: 'WindSong', cursive, sans-serif;
-  font-weight: 700;
-  margin-bottom: 15px;
-  animation: slideIn 2s ease forwards;
+p.lead {
+  font-size: 1.25rem;
   opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 2s ease-out forwards;
+  animation-delay: 0.3s; /* appear after heading */
 }
 
-#banner p {
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.5;
-  animation: fadeIn 2s ease forwards;
-  opacity: 0;
-  margin-bottom: 30px;
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  #banner h1 {
+    font-size: 4.2rem !important;
+  }
+
+  #banner p {
+        font-size: 1.9rem !important;
+}
 }
 
-.btn-home {
-  padding: 14px 32px;
-  font-size: 1.1rem;
-  color: white;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
-  border: none;
-  border-radius: 40px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  animation: fadeIn 2.5s ease forwards;
-  opacity: 0;
+/* Animation Keyframes */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.btn-home:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-}
-
-/* Banner animations */
-@keyframes slideIn {
-  from { transform: translateX(-100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 /* About Section */
 #about img {
@@ -219,25 +195,17 @@ nav {
   line-height: 1.6;
   font-size: 1.5rem;
 }
-
-/* Slide Animations */
-.slide-left, .slide-right {
+/* Common slide-up animation setup */
+.slide-up {
   opacity: 0;
-  will-change: transform, opacity;
-  transition: all 1s ease-out;
+  transform: translateY(40px);
+  transition: all 2s ease-out;
 }
 
-.slide-left {
-  transform: translateX(-100px);
-}
-
-.slide-right {
-  transform: translateX(100px);
-}
-
-.slide-in {
-  transform: translateX(0);
+/* When visible on scroll */
+.slide-up.visible {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Events Section */
@@ -555,50 +523,6 @@ footer {
     }
 
 
-    /* Force desktop nav links to be black */
-.nav-desktop .nav-link {
-  color: black !important;
-  font-size: 17px;
-}
-
-.nav-desktop .nav-link:hover,
-.nav-desktop .nav-link:focus {
-  color: #555 !important; /* slightly lighter shade on hover */
-}
-
-.logo {
-  margin-top: 1rem;
-  max-height: 100px;       /* Prevents it from being too tall */
-  width: auto;             /* Keeps aspect ratio */
-  max-width: 80%;          /* Shrinks on smaller devices */
-  height: auto;            /* Makes it scale proportionally */
-}
-@media (max-width: 576px) {
-  .logo {
-    max-height: 70px;  /* Slightly smaller for mobiles */
-  }
-}
-
-/* Ensure animated text wraps naturally */
-/* Animate text container */
-.animate-text {
-  display: inline-block;
-  white-space: normal; /* Allow wrapping */
-  text-align: center;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  max-width: 100%; /* prevent horizontal scroll */
-  line-height: 1.2;
-}
-
-/* Animated letters */
-.animate-text span {
-  display: inline-block;
-  max-width: 100%;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  flex-wrap: wrap;
-}
 
 
 .nav-logo {
@@ -618,3 +542,5 @@ footer {
     height: 28px; /* smaller on mobile */
   }
 }
+
+

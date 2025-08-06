@@ -21,86 +21,78 @@
 </head>
 
 <body>
-  <!-- Navbar (mobile toggler visible on small screens) -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top px-3">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-        <img src="./assets/logo.png" alt="MCA Hackathon Logo" class="nav-logo me-2">
-        <span class="text-white">MCA Hackathon</span>
+      <a class="navbar-brand  d-flex align-items-center" href="#">
+        <img src="./assets/logo.png" alt="MCA Hackathon Logo" class="nav-logo me-2" style="height:40px;">
+        <span class="text-dark fs-3">MCA Hackathon</span>
       </a>
 
-      <!-- Mobile toggler (opens custom offcanvas) -->
-      <button id="mobileToggler" class="navbar-toggler" aria-controls="mobileSidebar" aria-expanded="false"
-        aria-label="Open menu">
+      <!-- Mobile Toggler -->
+      <button id="mobileToggler" class="navbar-toggler" type="button" aria-controls="mobileSidebar"
+        aria-expanded="false" aria-label="Open menu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Desktop links -->
-      <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end nav-desktop" id="navbarNav">
+      <!-- Desktop Menu -->
+      <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#banner">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+          <li class="nav-item"><a class="nav-link text-dark fs-3" href="#banner">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-dark fs-3" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link  text-dark fs-3" href="#events">Events</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Custom Offcanvas Sidebar -->
+  <!-- Mobile Sidebar -->
   <aside id="mobileSidebar" class="site-offcanvas" aria-hidden="true" aria-labelledby="offcanvasTitle" role="dialog">
-    <div class="offcanvas-top">
-      <h4 id="offcanvasTitle" class="offcanvas-title">MCA Hackathon</h4>
-      <button class="offcanvas-close" id="offcanvasClose" aria-label="Close menu">&times;</button>
+    <div class="offcanvas-top d-flex justify-content-between align-items-center p-3 border-bottom">
+      <h4 id="offcanvasTitle" class="mb-0">MCA Hackathon</h4>
+      <button class="offcanvas-close btn btn-sm btn-outline-secondary" id="offcanvasClose"
+        aria-label="Close menu">&times;</button>
     </div>
-
     <nav>
-      <ul class="offcanvas-nav" id="offcanvasNav">
-        <li><a href="#banner" data-close>Home</a></li>
-        <li><a href="#about" data-close>About</a></li>
-        <li>
-          <a href="#events" data-close>Events</a>
-
-        </li>
+      <ul class="list-unstyled p-3" id="offcanvasNav">
+        <li><a href="#banner" class="d-block py-2 text-dark" data-close>Home</a></li>
+        <li><a href="#about" class="d-block py-2 text-dark" data-close>About</a></li>
+        <li><a href="#events" class="d-block py-2 text-dark" data-close>Events</a></li>
       </ul>
     </nav>
-
-    <div style="margin-top:auto; font-size:0.9rem; opacity:.85;">
-      <p class="mb-0">Follow us — <a href="#" style="color: #bfe1ff;">@MCAHack</a></p>
+    <div class="mt-auto p-3 small text-muted">
+      <p class="mb-0">Follow us — <a href="#" class="text-decoration-none" style="color:white;">@MCA</a></p>
     </div>
   </aside>
 
-  <!-- backdrop -->
+  <!-- Backdrop -->
   <div id="offcanvasBackdrop" class="offcanvas-backdrop" tabindex="-1" aria-hidden="true"></div>
 
   <!-- Banner -->
-  <section id="banner" class="d-flex align-items-center justify-content-center text-center text-white" style="
+
+  <section id="banner" class="text-white d-flex align-items-center justify-content-center text-center" style="
     height: 100vh;
-    background: linear-gradient(to right, rgba(15, 32, 39, 0.85),),
+    background: linear-gradient( rgba(15, 32, 39, 0.85)),
                 url('./assets/bg-image.jpg') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
-  ">
+">
     <div class="container">
-
-      <h1 class="display-4 fw-bold animate-text" id="animated-heading">MCA Hackathon 2025</h1>
-      <p class="lead mb-4 animate-text" id="animated-subtext"> where creativity meets technology!</p><br>
-
+      <h1 class="display-4 fw-bold">MCA Hackathon 2025</h1>
+      <p class="lead mb-4">where creativity meets technology!</p>
       <a href="#events" class="btn btn-outline-light btn-lg px-4 py-2 mt-3">Explore Events</a>
     </div>
   </section>
-
-
-
 
 
   <!-- About Section -->
   <section id="about" class="py-5 bg-light">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-6 mb-4 mb-md-0 slide-left">
+        <div class="col-md-6 mb-4 mb-md-0 slide-up">
           <img src="./assets/hack.jpg" alt="Hackathon" class="abt-img">
         </div>
-        <div class="col-md-6 slide-right">
+        <div class="col-md-6 slide-up">
           <h2 class="mb-3">Join the Hackathon!</h2>
           <p class="about-p">
             Hackathons are dynamic events where innovation meets execution. They bring together coders,
@@ -115,6 +107,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- Events Section -->
   <section id="events" class="py-5">
@@ -189,34 +182,17 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('slide-in');
+            entry.target.classList.add('visible');
           }
         });
       }, {
-        threshold: 0.3
+        threshold: 0.2
       });
 
-      document.querySelectorAll('.slide-left, .slide-right').forEach(el => {
+      document.querySelectorAll('.slide-up').forEach(el => {
         observer.observe(el);
       });
     });
-  </script>
-  <script>
-    function animateTextByLetters(id, delayStep = 0.05) {
-      const element = document.getElementById(id);
-      const text = element.textContent;
-      element.innerHTML = '';
-
-      text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.textContent = char === ' ' ? '\u00A0' : char;
-        span.style.animationDelay = `${i * delayStep}s`;
-        element.appendChild(span);
-      });
-    }
-
-    animateTextByLetters("animated-heading", 0.05);
-    animateTextByLetters("animated-subtext", 0.03);
   </script>
 
   <script>
